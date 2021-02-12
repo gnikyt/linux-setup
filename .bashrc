@@ -102,7 +102,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1="\[\e[36m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\]:\[\e[35m\]\W\[\e[m\] \[\e[34m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\][\[\e[m\]\[\e[33m\]\A\[\e[m\]\[\e[33m\]]\[\e[m\] "
+    PS1="\[\e[36m\]\u\[\e[m\]@\[\e[32m\]\h\[\e[m\]:\[\e[35m\]\W\[\e[m\] \[\e[34m\]\`parse_git_branch\`\[\e[m\]\[\e[33m\][\[\e[m\]\[\e[33m\]\t\[\e[m\]\[\e[33m\]]\[\e[m\] "
 else
     PS1="\u@\h:\W \`parse_git_branch\`[\A] "
 fi
