@@ -61,7 +61,7 @@ function parse_git_branch() {
 }
 
 #################################
-# VARS
+# HISTORY FILE
 #################################
 
 # Don't put duplicate lines or lines starting with space in the history.
@@ -73,6 +73,13 @@ shopt -s histappend
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+
+# Add history to current session 
+export PROMPT_COMMAND='history -a; history -r;'
+
+#################################
+# MISC VARS
+#################################
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -134,7 +141,7 @@ fi
 #################################
 
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/.go
+export GOPATH=$HOME/go
 PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 
 # set PATH so it includes user's private bin if it exists

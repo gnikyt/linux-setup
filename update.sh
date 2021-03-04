@@ -12,10 +12,9 @@ for path in $result
 do
     # Ignore "." and ignore if not an actual file
     if [ "$path" != "." ] && [ -f "$path" ]; then
-        start=$(echo "$path" | cut -c3)
-        if [ "$start" = "." ]; then
+        if echo "$path" | grep -q "home"; then
             # Path starts with ".", assume its a hidden file from home directory
-            fixed_path=$(echo "$path" | sed -e "s#./.#/home/$USER/.#")
+            fixed_path=$(echo "$path" | sed -e "s#./home/#/home/$USER/#")
         else
             # Path is somewhere else on the system besides home
             fixed_path=$(echo "$path" | sed -e "s#./#/#")
@@ -23,7 +22,7 @@ do
 
         # Show what will be copied
         echo "$fixed_path" ">" "$path"
-        
+
         if [ "$dry_run" = 0 ]; then
             # Do the copy if not a dry run
             cp "$fixed_path" "$path"
