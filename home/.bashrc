@@ -73,8 +73,9 @@ shopt -s histappend
 # For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
+HISTTIMEFORMAT="%F %T "
 
-# Add history to current session 
+# Add history to current session
 export PROMPT_COMMAND='history -a; history -r;'
 
 #################################

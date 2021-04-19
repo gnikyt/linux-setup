@@ -38,3 +38,8 @@ alias keeper='ssh-add -t 30m ~/.ssh/id_rsa'
 # Update PHP alternatives
 alias changephp='sudo update-alternatives --config php'
 
+# Search history
+alias histsrh='cat ~/.bash_history* | grep -i '
+
+# Reboot sound system
+alias soundreboot='pulseaudio -k && sudo alsa force-reload'
