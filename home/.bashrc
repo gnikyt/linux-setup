@@ -10,10 +10,28 @@ case $- in
 esac
 
 #################################
+# HISTORY FILE
+#################################
+
+# Don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+HISTTIMEFORMAT="%F %T "
+
+# Add history to current session
+export PROMPT_COMMAND='history -a; history -r;'
+
+#################################
 # FUNCTIONS
 #################################
 
-# get current status of git repo
+# Get current status of git repo
 function parse_git_dirty {
 	status=$(git status 2>&1 | tee)
 	dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
@@ -48,7 +66,7 @@ function parse_git_dirty {
 	fi
 }
 
-# get current branch in git repo
+# Get current branch in git repo
 function parse_git_branch() {
 	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
 	if [ ! "${BRANCH}" == "" ]
@@ -60,23 +78,42 @@ function parse_git_branch() {
 	fi
 }
 
-#################################
-# HISTORY FILE
-#################################
+# Pomodo timer
+# Example: `promo 5 Take a Break`
+# Result: Plays sound and shows notification.
+function pomo() {
+    arg1=$1
+    shift
+    args="$*"
 
-# Don't put duplicate lines or lines starting with space in the history.
-HISTCONTROL=ignoreboth
+    min=${arg1:?Example: pomo 15 Take a break}
+    sec=$((min * 60))
+    msg="${args:?Example: pomo 15 Take a break}"
 
-# Append to the history file, don't overwrite it
-shopt -s histappend
+    while true; do
+        sleep "${sec:?}" && for _ in {1..2}; do ogg123 /usr/share/sounds/gnome/default/alerts/sonar.ogg &> /dev/null; done && notify-send -u critical -t 0 "${msg:?}"
+    done
+}
 
-# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
-HISTTIMEFORMAT="%F %T "
+# History backup
+# Example: `histbkup`
+# Result: will create a `.bash_history.[YYYY]_[MM]`
+function histbkup() {
+	KEEP=200
+	BASH_HIST=~/.bash_history
+	BACKUP="$BASH_HIST".$(date +%Y_%m)
 
-# Add history to current session
-export PROMPT_COMMAND='history -a; history -r;'
+	# History file is newer then backup
+	if [ -f "$BACKUP" ]; then
+	# There is already a backup
+	cp -f "$BASH_HIST" "$BACKUP"
+	else
+	# Create new backup, leave last few commands and reinitialize
+	mv -f "$BASH_HIST" "$BACKUP"
+	tail -n "$KEEP" "$BACKUP" > "$BASH_HIST"
+	history -r
+	fi
+}
 
 #################################
 # MISC VARS
