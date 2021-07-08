@@ -43,3 +43,4 @@ alias histsrh='cat ~/.bash_history* | grep -i --color '
 
 # Reboot sound system
 alias soundreboot='pulseaudio -k && sudo alsa force-reload'
+

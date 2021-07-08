@@ -31,6 +31,24 @@ export PROMPT_COMMAND='history -a; history -r;'
 # FUNCTIONS
 #################################
 
+# Git always use verbose
+function git {
+    case "$1" in
+        ci|commit|fetch|pull|push)
+        gitargs=""
+        for i in $@; do
+            if [ "$1" != "$i" ]; then
+                gitargs="$gitargs $i"
+            fi
+        done
+        command git $1 -v $gitargs
+        ;;
+    *)
+        command git $@
+        ;;
+    esac
+}
+
 # Get current status of git repo
 function parse_git_dirty {
 	status=$(git status 2>&1 | tee)
@@ -115,6 +133,20 @@ function histbkup() {
 	fi
 }
 
+# CD to show a list when switching
+# Example: `cd ..`
+# Result: Directory changed, directory listed
+function cd() {
+    builtin cd "$@" && ls -lA --color
+}
+
+# Move 'up' so many directories instead of using several cd ../../, etc.
+# Example: `up 3`
+# Result: Moves up 3 directories
+function up() {
+	cd $(eval printf '../'%.0s {1..$1}) && pwd;
+}
+
 #################################
 # MISC VARS
 #################################
@@ -178,6 +210,7 @@ fi
 # PATH
 #################################
 
+export GEM_HOME=$HOME/.gems
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
 PATH=$GOPATH/bin:$GOROOT/bin:$PATH
@@ -197,3 +230,4 @@ if [ -d "$HOME/.npm-packages" ] ; then
     NPM_PACKAGES="${HOME}/.npm-packages"
     PATH="$NPM_PACKAGES/bin:$PATH"
 fi
+

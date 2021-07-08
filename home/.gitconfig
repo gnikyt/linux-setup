@@ -1,0 +1,23 @@
+[pull]
+	verbose = true
+[user]
+	name = Tyler King
+	email = tyler@osiset.com
+[alias]
+	conflicts = !git ls-files -u | cut -f 2 | sort -u
+	prune-tags = !git fetch --prune origin '+refs/tags/*:refs/tags/*'
+        prune-branches = "!gitPruneBranch() { git fetch --prune && for branch in `git branch -vv | grep ': gone]' | awk '{print $1}'`; do git branch -D $branch; done }; gitPruneBranch"
+	prune-all = !git prune-branches && git prune-tags
+	tag-list = !git tag -l | sort -V
+	alias = config --get-regexp ^alias\\.
+[core]
+	editor = code --wait
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[diff]
+    tool = vscode
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+
