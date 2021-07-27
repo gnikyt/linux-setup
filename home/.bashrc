@@ -31,24 +31,6 @@ export PROMPT_COMMAND='history -a; history -r;'
 # FUNCTIONS
 #################################
 
-# Git always use verbose
-function git {
-    case "$1" in
-        ci|commit|fetch|pull|push)
-        gitargs=""
-        for i in $@; do
-            if [ "$1" != "$i" ]; then
-                gitargs="$gitargs $i"
-            fi
-        done
-        command git $1 -v $gitargs
-        ;;
-    *)
-        command git $@
-        ;;
-    esac
-}
-
 # Get current status of git repo
 function parse_git_dirty {
 	status=$(git status 2>&1 | tee)
@@ -231,3 +213,7 @@ if [ -d "$HOME/.npm-packages" ] ; then
     PATH="$NPM_PACKAGES/bin:$PATH"
 fi
 
+# Gem packages
+if [ -d "$GEM_HOME" ] ; then
+    PATH="$GEM_HOME/bin:$PATH"
+fi

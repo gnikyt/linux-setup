@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Screen width and height
+IFS='x' read -r swidth sheight < <(xdpyinfo | grep dimensions | grep -o '[0-9x]*' | head -n1)
+
+# Window ID
+wid=$(wmctrl -l | grep NVR | grep -Eo "^0x([A-Za-z0-9]+)")
+
+# Window props
+wprops=$(xwininfo -id "$wid" | grep geometry | grep -Eo "([0-9]+)x([0-9]+)(\+|\-|\+-)([0-9]+)(\+|\-|\+-)([0-9]+)")
+
+# Window width
+wwidth=$(echo "$wprops" | grep -Eo "([0-9]+)\x")
+wwidth=${wwidth::-1}
+
+# Window height
+wheight=$(echo "$wprops" | grep -Eo "\x([0-9]+)")
+wheight=${wheight:1}
+nwheight=$(("$wheight"+200))
+
+# Check if window is hidden
+ishidden=1
+hidden=$(echo "$wprops" | grep "-")
+if [ "$hidden" = "" ]; then
+    ishidden=0
+fi;
+
+# Window center X
+wcenterx=$(("$swidth"/2-"$wwidth"/2))
+
+if [ "$ishidden" = 0 ]; then
+    # Set to hide window
+    wmctrl -i -r "$wid" -e 0,"$wcenterx",-"$nwheight","$wwidth","$wheight"
+
+    # Get the previous active window and show it
+    paw=$(cat /tmp/nvrhideshow)
+    wmctrl -i -a "$paw"
+else
+    # Get the active window and save it
+    wactive=$(wmctrl -lp | grep "$(xprop -root | grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | sed 's/^0x/0x0/')" | grep -Eo "^0x([A-Za-z0-9]+)")
+    echo "$wactive" > /tmp/nvrhideshow
+
+    # Set to show window
+    wmctrl -i -r "$wid" -e 0,"$wcenterx",0,"$wwidth","$wheight"
+    wmctrl -i -a "$wid"
+fi;
