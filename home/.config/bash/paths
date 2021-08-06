@@ -1,0 +1,25 @@
+export GEM_HOME=$HOME/.gems
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# NPM packages
+if [ -d "$HOME/.npm-packages" ] ; then
+    NPM_PACKAGES="${HOME}/.npm-packages"
+    PATH="$NPM_PACKAGES/bin:$PATH"
+fi
+
+# Gem packages
+if [ -d "$GEM_HOME" ] ; then
+    PATH="$GEM_HOME/bin:$PATH"
+fi
