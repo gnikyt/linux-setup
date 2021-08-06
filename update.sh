@@ -20,12 +20,22 @@ do
             fixed_path=$(echo "$path" | sed -e "s#./#/#")
         fi
 
-        # Show what will be copied
-        echo "$fixed_path" ">" "$path"
+        # Show what will be symlinked
+        printf "############################################\n# ln -s %s %s\n############################################" "$path" "$fixed_path"
 
         if [ "$dry_run" = 0 ]; then
-            # Do the copy if not a dry run
-            cp "$fixed_path" "$path"
+            # Do the symlink, if not a dry run
+            if [ -L "$fixed_path" ]; then
+                echo ">> Link name exist, delete the link first and try again? (Y/N) "
+                read -r answer
+                if [ "$answer" != "${answer#[Yy]}" ] ;then
+                    sudo rm -i "$fixed_path"s
+                    ln -s "$path" "$fixed_path"
+                fi
+            else
+                ln -s "$path" "$fixed_path"
+                rm "$fixed_path"
+            fi
         fi
     fi
 done

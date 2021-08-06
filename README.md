@@ -1,6 +1,6 @@
 # Linux Setup
 
-Quick jot notes and files to setup my Linux boxes.
+Quick jot notes and files to configure my Linux setup.
 
 TODO: Move to automation.
 
