@@ -7,6 +7,7 @@
 
 dry_run=${DRY_RUN:-0}
 result=$(find . -not -path './.git/*' -not -path './.git' -not -path './README.md' -not -path './update.sh')
+pwd=$(pwd)
 
 for path in $result
 do
@@ -19,23 +20,22 @@ do
             # Path is somewhere else on the system besides home
             fixed_path=$(echo "$path" | sed -e "s#./#/#")
         fi
+        path=$(echo "$path" | sed -e "s#./#$pwd/#")
 
         # Show what will be symlinked
         printf "############################################\n# ln -s %s %s\n############################################" "$path" "$fixed_path"
 
         if [ "$dry_run" = 0 ]; then
             # Do the symlink, if not a dry run
-            if [ -L "$fixed_path" ]; then
-                echo ">> Link name exist, delete the link first and try again? (Y/N) "
-                read -r answer
-                if [ "$answer" != "${answer#[Yy]}" ] ;then
-                    sudo rm -i "$fixed_path"s
-                    ln -s "$path" "$fixed_path"
-                fi
-            else
+            if echo "$path" | grep -q "home"; then
                 ln -s "$path" "$fixed_path"
-                rm "$fixed_path"
+                #rm $fixed_path
+            else
+                sudo ln -s "$path" "$fixed_path"
+                #sudo rm $fixed_path
             fi
         fi
+
+        echo ""
     fi
 done

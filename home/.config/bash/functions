@@ -1,0 +1,97 @@
+# Get current status of git repo
+function parse_git_dirty {
+	status=$(git status 2>&1 | tee)
+	dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
+	untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
+	ahead=$(echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?")
+	newfile=$(echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?")
+	renamed=$(echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?")
+	deleted=$(echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?")
+	bits=''
+	if [ "${renamed}" == "0" ]; then
+		bits=">${bits}"
+	fi
+	if [ "${ahead}" == "0" ]; then
+		bits="*${bits}"
+	fi
+	if [ "${newfile}" == "0" ]; then
+		bits="+${bits}"
+	fi
+	if [ "${untracked}" == "0" ]; then
+		bits="?${bits}"
+	fi
+	if [ "${deleted}" == "0" ]; then
+		bits="x${bits}"
+	fi
+	if [ "${dirty}" == "0" ]; then
+		bits="!${bits}"
+	fi
+	if [ ! "${bits}" == "" ]; then
+		echo " ${bits}"
+	else
+		echo ""
+	fi
+}
+
+# Get current branch in git repo
+function parse_git_branch() {
+	BRANCH=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	if [ ! "${BRANCH}" == "" ]
+	then
+		STAT=$(parse_git_dirty)
+		echo "[${BRANCH}${STAT}]"
+	else
+		echo ""
+	fi
+}
+
+# Pomodo timer
+# Example: `promo 5 Take a Break`
+# Result: Plays sound and shows notification.
+function pomo() {
+    arg1=$1
+    shift
+    args="$*"
+
+    min=${arg1:?Example: pomo 15 Take a break}
+    sec=$((min * 60))
+    msg="${args:?Example: pomo 15 Take a break}"
+
+    while true; do
+        sleep "${sec:?}" && for _ in {1..2}; do ogg123 /usr/share/sounds/gnome/default/alerts/sonar.ogg &> /dev/null; done && notify-send -u critical -t 0 "${msg:?}"
+    done
+}
+
+# History backup
+# Example: `histbkup`
+# Result: will create a `.bash_history.[YYYY]_[MM]`
+function histbkup() {
+	KEEP=200
+	BASH_HIST=~/.bash_history
+	BACKUP="$BASH_HIST".$(date +%Y_%m)
+
+	# History file is newer then backup
+	if [ -f "$BACKUP" ]; then
+	# There is already a backup
+	cp -f "$BASH_HIST" "$BACKUP"
+	else
+	# Create new backup, leave last few commands and reinitialize
+	mv -f "$BASH_HIST" "$BACKUP"
+	tail -n "$KEEP" "$BACKUP" > "$BASH_HIST"
+	history -r
+	fi
+}
+
+# CD to show a list when switching
+# Example: `cd ..`
+# Result: Directory changed, directory listed
+function cd() {
+    builtin cd "$@" && ls -lA --color
+}
+
+# Move 'up' so many directories instead of using several cd ../../, etc.
+# Example: `up 3`
+# Result: Moves up 3 directories
+function up() {
+	cd $(eval printf '../'%.0s {1..$1}) && pwd;
+}
