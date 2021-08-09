@@ -27,12 +27,13 @@ do
 
         if [ "$dry_run" = 0 ]; then
             # Do the symlink, if not a dry run
-            if echo "$path" | grep -q "home"; then
+            homes=$(echo "$path" | grep -o "home" | wc -l)
+            if [ "$homes" -gt 1 ]; then
                 ln -s "$path" "$fixed_path"
-                #rm $fixed_path
+                # rm $fixed_path
             else
                 sudo ln -s "$path" "$fixed_path"
-                #sudo rm $fixed_path
+                # sudo rm $fixed_path
             fi
         fi
 
