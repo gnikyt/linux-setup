@@ -3,4 +3,4 @@ Description=undervolt
 
 [Service]
 Type=oneshot
-ExecStart=/home/tyler/.local/bin/undervolt -v --core -120 --cache -120
+ExecStart=/usr/local/bin/undervolt -v --core -120 --cache -120
