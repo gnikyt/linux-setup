@@ -24,5 +24,7 @@ export LC_CTYPE=en_US.UTF-8
 . $HOME/.config/bash/misc
 . $HOME/.config/bash/prompt
 . $HOME/.config/bash/aliases
-. $HOME/.config/bash/autocomplete
 . $HOME/.config/bash/paths
+. $HOME/.config/bash/autocomplete
+
+. "$HOME/.cargo/env"

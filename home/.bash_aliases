@@ -33,7 +33,7 @@ alias python='/usr/bin/python3'
 alias pip='/usr/bin/pip3'
 
 # SSH keep password
-alias keeper='ssh-add -t 30m ~/.ssh/id_rsa'
+alias sshmem='ssh-add -t 30m ~/.ssh/id_rsa'
 
 # Update PHP alternatives
 alias changephp='sudo update-alternatives --config php'
@@ -43,3 +43,6 @@ alias histsrh='cat ~/.bash_history* | grep -i --color '
 
 # Reboot sound system
 alias soundreboot='pulseaudio -k && sudo alsa force-reload'
+
+# Git quick
+alias g='git'
