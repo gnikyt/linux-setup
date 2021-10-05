@@ -1,5 +1,5 @@
 # Get current status of git repo
-function parse_git_dirty {
+function parse_git_dirty() {
 	status=$(git status 2>&1 | tee)
 	dirty=$(echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?")
 	untracked=$(echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?")
@@ -94,4 +94,11 @@ function cd() {
 # Result: Moves up 3 directories
 function up() {
 	cd $(eval printf '../'%.0s {1..$1}) && pwd;
+}
+
+# Show the paths
+# Example: `showpath`
+# Result: Shows path listing, one per line
+function showpath() {
+    echo "${PATH//:/ }" | tr " " "\n"
 }
