@@ -102,3 +102,26 @@ function up() {
 function showpath() {
     echo "${PATH//:/ }" | tr " " "\n"
 }
+
+# Convert AMR file to MP3 with automatic call checks for output naming.
+# Example: `amr2mp3 phone_20211005-120300.amr`
+# Result: Creates 2021_10_05_12_03_00.mp3
+function amr2mp3() {
+    if [[ "$1" =~ "phone_" ]]; then
+        fixed=$(echo "$1" | cut -d'_' -f2)
+        date=$(echo "$fixed" | cut -d'-' -f1)
+        time=$(echo "$fixed" | cut -d'-' -f2)
+        year=${date:0:4}
+        month=${date:4:2}
+        day=${date:6:2}
+        hour=${time:0:2}
+        min=${time:2:2}
+        sec=${time:4:2}
+
+        filename=$(echo "${year}_${month}_${day}_${hour}_${min}_${sec}.mp3")
+    else
+        filename=${$1//amr/mp3}
+    fi
+
+    ffmpeg -i "$1" -ar 12000 "$filename"
+}
