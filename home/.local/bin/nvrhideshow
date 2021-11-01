@@ -34,11 +34,13 @@ if [ "$ishidden" = 0 ]; then
 
     # Get the previous active window and show it
     paw=$(cat /tmp/nvrhideshow)
+    echo "HIDDEN" $paw
     wmctrl -i -a "$paw"
 else
     # Get the active window and save it
     wactive=$(wmctrl -lp | grep "$(xprop -root | grep _NET_ACTIVE_WINDOW | head -1 | awk '{print $5}' | sed 's/,//' | sed 's/^0x/0x0/')" | grep -Eo "^0x([A-Za-z0-9]+)")
     echo "$wactive" > /tmp/nvrhideshow
+    echo "SHOW" $wactive
 
     # Set to show window
     wmctrl -i -r "$wid" -e 0,"$wcenterx",0,"$wwidth","$wheight"
