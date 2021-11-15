@@ -19,6 +19,9 @@ if [ -d "$HOME/.npm-packages" ] ; then
     NPM_PACKAGES="${HOME}/.npm-packages"
     PATH="$NPM_PACKAGES/bin:$PATH"
 fi
+if [ -d "$HOME/.npm-global" ]; then
+    PATH="$HOME/.npm-global/bin:$PATH"
+fi
 
 # Gem packages
 if [ -d "$GEM_HOME" ] ; then

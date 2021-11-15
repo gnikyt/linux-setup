@@ -33,7 +33,7 @@ alias python='/usr/bin/python3'
 alias pip='/usr/bin/pip3'
 
 # SSH keep password
-alias sshmem='ssh-add -t 120m ~/.ssh/id_rsa'
+alias sshmem='ssh-add -t 120m ~/.ssh/id_rsa &>/dev/null; if [ "$?" == 2 ]; then eval `ssh-agent -s`; ssh-add -t 120m ~/.ssh/id_rsa; fi;'
 
 # Update PHP alternatives
 alias changephp='sudo update-alternatives --config php'
