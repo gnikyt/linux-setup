@@ -1,4 +1,4 @@
-. $HOME/.config/bash/functions
+. $HOME/.bashrc.d/functions
 
 # Set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
@@ -20,3 +20,4 @@ xterm*|rxvt*)
 *)
     ;;
 esac
+
