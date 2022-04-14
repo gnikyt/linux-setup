@@ -1,21 +1,29 @@
 # Linux Setup
 
-Quick jot notes and files to configure my Linux setup.
+Quick jot notes and files to configure my Linux setup on Fedora.
 
-TODO: Move to automation.
+## Installation
 
-## Packages
+`./install` will create symlinks based on the paths in this repository.
 
-- TLP
-- Undervolt
+## Tips
 
-## TODO After Install
+### Chrome Wayland
 
-- Install Python
-- Install PHP and Composer
-- Install Node and NPM with non-root
-- Install Docker and Docker Compose
+For better Wayland support, set `chrome://flags/#ozone-platform-hint` to `Wayland`.
 
-## Updating
+### GNOME Extensions
 
-`./update.sh`
+- Caffeine (eon)
+- Clipboard History (SUPERCILEX)
+- Color Picker (grroot)
+- Disable Workspace Animations (amal.anthony)
+- Hide Activities Button (zenten30)
+- Sound Input & Output Device Chooser (kgshank)
+- User Themes (fmuellner)
+- Vitals (corecoding)
+- Workspaces Bar (fthx)
+
+## TODO
+
+* Move to automation
