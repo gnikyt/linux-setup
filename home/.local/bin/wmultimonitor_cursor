@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+# Wayland multimonitor cursor fix for gnome
+
+gsettings set org.gnome.desktop.interface cursor-size 32
+sleep 0.5
+gsettings set org.gnome.desktop.interface cursor-size 24
