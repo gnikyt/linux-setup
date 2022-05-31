@@ -10,6 +10,17 @@ then
 fi
 export PATH
 
+# XDG support
+export XDG_DATA_HOME="$HOME"/.local/share
+export XDG_CONFIG_HOME="$HOME"/.config
+export XDG_STATE_HOME="$HOME"/.local/state
+export XDG_CACHE_HOME="$HOME"/.cache
+
+# Program supports
+export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
+export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
+export NVM_DIR="$XDG_DATA_HOME"/nvm
+
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
 	for rc in ~/.bashrc.d/*; do
@@ -19,4 +30,3 @@ if [ -d ~/.bashrc.d ]; then
 	done
 fi
 unset rc
-

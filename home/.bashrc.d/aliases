@@ -36,7 +36,13 @@ alias pip='/usr/bin/pip3'
 alias sshmem='ssh-add -t 120m ~/.ssh/id_rsa &>/dev/null; if [ "$?" == 2 ]; then eval `ssh-agent -s`; ssh-add -t 120m ~/.ssh/id_rsa; fi;'
 
 # Search history
-alias histsrh='cat ~/.bash_history* | grep -i --color '
+alias histsrh='cat ~/.bash_history* | grep -i --color'
 
 # Git quick
 alias g='git'
+
+# Workspace naming in Gnome
+alias wsnames='gsettings set org.gnome.desktop.wm.preferences workspace-names'
+
+# Batteries info (Thinkpad)
+alias batusage='cat /sys/class/power_supply/BAT*/power_now | awk "{t+=$0}END{print t/1000000}"'
