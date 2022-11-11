@@ -46,3 +46,12 @@ alias wsnames='gsettings set org.gnome.desktop.wm.preferences workspace-names'
 
 # Batteries info (Thinkpad)
 alias batusage='cat /sys/class/power_supply/BAT*/power_now | awk "{t+=$0}END{print t/1000000}"'
+
+# Gnome theme: Dark
+alias gnomedark='gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark \
+&& gsettings set org.gnome.desktop.interface color-scheme prefer-dark'
+
+# Gnome theme: Light
+alias gnomelight='gsettings set org.gnome.desktop.interface gtk-theme Adwaita \
+&& gsettings set org.gnome.desktop.interface color-scheme prefer-light'
+

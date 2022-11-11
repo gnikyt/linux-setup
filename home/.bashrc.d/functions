@@ -126,3 +126,8 @@ function amr2mp3() {
     ffmpeg -i "$1" -ar 12000 "$filename"
 }
 
+# Convert Markdown to PDF
+function md2pdf() {
+    pandoc --pdf-engine=xelatex "$1" -o "$(dirname -- "$1")/$(basename -- "$1" .md).pdf"
+}
+
