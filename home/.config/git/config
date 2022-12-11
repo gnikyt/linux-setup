@@ -2,7 +2,7 @@
 	verbose = true
 [user]
 	name = Tyler King
-	email = tyler@osiset.com
+	email = tyler.n.king@gmail.com
 [alias]
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 	prune-tags = !git fetch --prune origin '+refs/tags/*:refs/tags/*'
