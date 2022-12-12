@@ -1,0 +1,9 @@
+[Nemo Action]
+
+Name=Markdown to PDF
+Comment=Convert Markdown file to PDF
+Exec=/home/tyler/.local/bin/md2pdf "%F"
+Icon-Name=document-send
+Selection=s
+Extensions=md;
+Terminal=false

@@ -34,7 +34,8 @@
             "banshee",
             "vlc",
             "rhythmbox",
-            "org.gnome.Totem"
+            "org.gnome.Totem",
+            "firefox"
         ]
     },
     "section2": {

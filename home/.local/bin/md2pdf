@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Convert Markdown to PDF
+# Usage: `md2pdf file.md`
+# Usage: `md2pdf file.md emoji`
+
+if [[ "$3" == "emoji" ]]; then
+    pandoc --pdf-engine=xelatex "$1" -V mainfont="DejaVu Sans" -o "$(dirname -- "$1")/$(basename -- "$1" .md).pdf";
+else
+    pandoc --pdf-engine=xelatex "$1" -o "$(dirname -- "$1")/$(basename -- "$1" .md).pdf";
+fi
+
