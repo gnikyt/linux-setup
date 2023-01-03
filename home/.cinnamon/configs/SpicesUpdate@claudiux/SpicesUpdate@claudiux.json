@@ -252,6 +252,11 @@
                 "requestnewdownload": false
             },
             {
+                "name": "weather@mockturtl",
+                "isunprotected": true,
+                "requestnewdownload": false
+            },
+            {
                 "name": "workspace-name@willurd",
                 "isunprotected": true,
                 "requestnewdownload": false

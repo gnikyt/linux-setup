@@ -100,7 +100,7 @@
         "units": "px",
         "description": "Icon size",
         "dependency": "menu-custom",
-        "value": 22.0
+        "value": 22
     },
     "menu-label": {
         "type": "entry",
@@ -114,7 +114,7 @@
         "type": "switch",
         "default": false,
         "description": "Use a fixed menu height",
-        "tooltip": "Keep the size of the menu the same now matter how many favorites or categories there are.",
+        "tooltip": "Keep the size of the menu the same no matter how many favorites or categories there are.",
         "value": false
     },
     "menu-height": {
@@ -201,7 +201,7 @@
         "default": true,
         "description": "Show recents",
         "tooltip": "Choose whether or not to show recents in the menu.",
-        "value": true
+        "value": false
     },
     "category-hover": {
         "type": "switch",
@@ -263,5 +263,5 @@
         "callback": "_launch_editor",
         "tooltip": "Press this button to customize your menu entries."
     },
-    "__md5__": "c152555b992ad64460760bcb9c99d27f"
+    "__md5__": "38c9122e36f6267fae12706a694ac35f"
 }

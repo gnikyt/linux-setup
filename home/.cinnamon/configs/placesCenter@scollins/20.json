@@ -119,7 +119,7 @@
         "default": "~/",
         "select-dir": true,
         "tooltip": "Leave blank to disable",
-        "value": "~/"
+        "value": "file:///home/tyler"
     },
     "showDesktop": {
         "type": "checkbox",

@@ -11,7 +11,7 @@
 	tag-list = !git tag -l | sort -V
 	alias = config --get-regexp ^alias\\.
 [core]
-	editor = DISPLAY=wayland-0 GDK_BACKEND=wayland flatpak run --file-forwarding re.sonny.Commit @@
+	editor = flatpak run --file-forwarding re.sonny.Commit @@
 [merge]
     tool = vscode
 [mergetool "vscode"]

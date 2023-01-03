@@ -44,17 +44,29 @@
         "type": "section",
         "description": "Display"
     },
-    "buttons-use-entire-space": {
-        "type": "switch",
-        "default": false,
-        "description": "Window buttons can have different sizes and use the entire space available",
-        "value": false
-    },
     "panel-show-label": {
         "type": "switch",
         "default": true,
         "description": "Show window names in the panel",
         "value": true
+    },
+    "button-width": {
+        "type": "spinbutton",
+        "default": 150,
+        "min": 0,
+        "max": 1000,
+        "step": 5,
+        "units": "pixels",
+        "description": "Window button width in the panel",
+        "dependency": "panel-show-label",
+        "value": 240
+    },
+    "buttons-use-entire-space": {
+        "type": "switch",
+        "default": false,
+        "description": "Window buttons can have different sizes and use the entire space available",
+        "dependency": "panel-show-label",
+        "value": false
     },
     "window-preview": {
         "type": "switch",
@@ -85,7 +97,7 @@
     "last-window-order": {
         "type": "generic",
         "default": "",
-        "value": "90177598::92274691::109051977::52428803::134217734::130023431"
+        "value": "52428862::79691779::98566217::102760454"
     },
-    "__md5__": "787a51c0a07fd14c53e6fa075704e7ad"
+    "__md5__": "b35ffa9a47e7de8ef0c209cfa6a0e860"
 }
