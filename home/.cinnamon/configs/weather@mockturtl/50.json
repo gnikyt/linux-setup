@@ -212,7 +212,7 @@
         "default": false,
         "description": "Manual Location",
         "tooltip": "Enable this if your location is not accurate",
-        "value": true
+        "value": false
     },
     "location": {
         "type": "entry",
@@ -220,7 +220,7 @@
         "dependency": "manualLocation",
         "description": "Location",
         "tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice.",
-        "value": "Grand Falls-Windsor, Newfoundland and Labrador, CA-NL, Canada"
+        "value": "44.6747,-63.5094"
     },
     "saveLocation": {
         "type": "button",

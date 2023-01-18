@@ -35,7 +35,8 @@
             "vlc",
             "rhythmbox",
             "org.gnome.Totem",
-            "firefox"
+            "firefox",
+            "spotify"
         ]
     },
     "section2": {
@@ -47,7 +48,7 @@
         "default": false,
         "description": "Show song information on the panel",
         "dependency": "playerControl",
-        "value": false
+        "value": true
     },
     "truncatetext": {
         "type": "spinbutton",
@@ -84,7 +85,7 @@
         "default": false,
         "description": "Show album art as icon",
         "dependency": "playerControl",
-        "value": false
+        "value": true
     },
     "hideSystray": {
         "type": "switch",
