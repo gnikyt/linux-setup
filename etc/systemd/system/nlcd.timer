@@ -1,0 +1,9 @@
+[Unit]
+Description=Timer for NLCD command.
+
+[Timer]
+Unit=nlcd.service
+OnCalendar=Mon..Fri 09:00
+
+[Install]
+WantedBy=timers.target

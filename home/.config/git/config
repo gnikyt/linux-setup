@@ -10,8 +10,6 @@
 	prune-all = !git prune-branches && git prune-tags
 	tag-list = !git tag -l | sort -V
 	alias = config --get-regexp ^alias\\.
-[core]
-	editor = flatpak run --file-forwarding re.sonny.Commit @@
 [merge]
     tool = vscode
 [mergetool "vscode"]

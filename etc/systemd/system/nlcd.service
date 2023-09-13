@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs NLCD command Mon-Fri at 0900.
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/tyler/.local/bin/nlcd
+
+[Install]
+WantedBy=multi-user.target
+

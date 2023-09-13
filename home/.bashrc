@@ -20,6 +20,9 @@ export XDG_CACHE_HOME="$HOME"/.cache
 export REDISCLI_HISTFILE="$XDG_DATA_HOME"/redis/rediscli_history
 export SQLITE_HISTORY=$XDG_DATA_HOME/sqlite_history
 export NVM_DIR="$XDG_DATA_HOME"/nvm
+export GEM_HOME=~/.gems
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
