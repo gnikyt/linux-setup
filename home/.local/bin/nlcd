@@ -3,9 +3,4 @@
 date=$(date '+%Y-%m-%d')
 loc="/mnt/c/Users/tyler/OneDrive/Apps/Docket"
 /home/tyler/.local/bin/docket -office 7 -format csv > "$loc/$date".csv
-microsoft-edge \
-	--headless \
-	--screenshot="$loc/$date.png" \
-	--window-size=1200,3000 \
-	--user-agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36" \
-	"https://docket.court.nl.ca/?date=$date&days_to_display=1&office%5B%5D=7&accused=&all_dates=0" 2>/dev/null
+rclone copy "$loc/$date".csv proton:"Court Docket Archives"
